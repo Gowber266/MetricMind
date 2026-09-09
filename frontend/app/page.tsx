@@ -60,6 +60,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
   const [loading, setLoading] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("All Regions");
+  const [sessionId] = useState("session_frontend");
 
   // Modals & Drawers
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
@@ -72,7 +73,12 @@ export default function Home() {
     setIsAuditOpen(true);
   }
 
-  function handleClearChat() {
+  async function handleClearChat() {
+    try {
+      await fetch(`${BACKEND_URL}/sessions/${sessionId}/clear`, { method: "POST" });
+    } catch (e) {
+      // Ignore network failure on session clear
+    }
     setMessages(INITIAL_MESSAGES);
   }
 
@@ -92,7 +98,7 @@ export default function Home() {
       const res = await fetch(`${BACKEND_URL}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, session_id: sessionId }),
       });
 
       if (!res.ok) {
