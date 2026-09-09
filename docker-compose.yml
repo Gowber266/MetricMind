@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  semantic-layer:
+    build:
+      context: ./semantic-layer
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - CUBEJS_PORT=4000
+      - CUBEJS_DB_TYPE=sqlite
+      - CUBEJS_DB_NAME=/app/sales.db
+      - CUBEJS_API_SECRET=metricmind_secret_key
+    volumes:
+      - ./backend/sales.db:/app/sales.db
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CUBE_API_URL=http://semantic-layer:4000
+    depends_on:
+      - semantic-layer
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+    depends_on:
+      - backend
