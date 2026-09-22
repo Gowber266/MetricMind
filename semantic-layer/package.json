@@ -1,0 +1,15 @@
+{
+  "name": "metricmind-semantic-layer",
+  "version": "0.3.0",
+  "description": "Cube.dev Semantic Layer for MetricMind BI",
+  "main": "cube.js",
+  "scripts": {
+    "dev": "cubejs-server",
+    "start": "cubejs-server"
+  },
+  "dependencies": {
+    "@cubejs-backend/server": "^0.35.0",
+    "@cubejs-backend/sqlite-driver": "^0.35.0",
+    "dotenv": "^16.4.5"
+  }
+}

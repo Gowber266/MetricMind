@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-09-08T15:37:02.971044",
+  "status": "SUCCESS",
+  "records_extracted": 600,
+  "stg_sales_records": 600,
+  "fct_margin_records": 595,
+  "execution_duration_sec": 0.1112
+}
