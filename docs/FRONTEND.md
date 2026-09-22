@@ -16,4 +16,4 @@
 1. User types a question → `handleSend()` in `page.tsx`
 2. POST request sent to `/api/query`
 3. Backend (LangChain + Semantic Layer) returns an answer + chart data
-4. Response is rendered as a chat bubble + chart (if applicable)
+4. Response is rendered as a chat bubble + chart (if applicable)git remote -v
