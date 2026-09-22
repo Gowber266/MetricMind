@@ -1,0 +1,65 @@
+cubes:
+  - name: sales
+    sql_table: fct_sales
+
+    dimensions:
+      - name: sale_date
+        sql: sale_date
+        type: time
+
+      - name: region
+        sql: region
+        type: string
+
+      - name: country
+        sql: country
+        type: string
+
+      - name: product
+        sql: product
+        type: string
+
+      - name: quarter
+        sql: quarter
+        type: string
+
+      - name: month
+        sql: month
+        type: string
+
+    measures:
+      - name: revenue
+        sql: revenue
+        type: sum
+        title: "Revenue"
+        format: currency
+
+      - name: material_cost
+        sql: material_cost
+        type: sum
+        title: "Material Cost"
+        format: currency
+
+      - name: shipping_cost
+        sql: shipping_cost
+        type: sum
+        title: "Shipping Cost"
+        format: currency
+
+      - name: cost
+        sql: total_cost
+        type: sum
+        title: "Cost"
+        format: currency
+
+      - name: margin
+        sql: margin
+        type: sum
+        title: "Margin"
+        format: currency
+
+      - name: margin_pct
+        sql: "ROUND(({CUBE.revenue} - {CUBE.cost}) / NULLIF({CUBE.revenue}, 0) * 100, 2)"
+        type: number
+        title: "Margin %"
+        format: percent
